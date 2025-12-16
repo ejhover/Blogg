@@ -1,7 +1,5 @@
 # BBBlog - Full-Stack Blogging Website
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)  
-
 **BBBlog** is a fully functional blogging platform built with **Node.js**, **Express**, **MySQL**, and **Pug templates**. It allows users to create, edit, and delete posts, comment asynchronously, and manage accounts with admin privileges. This project demonstrates a complete end-to-end web application, including back-end APIs, front-end rendering, and user session management.
 
 ---
@@ -43,4 +41,42 @@
 ---
 
 ## 📂 Folder Structure
+```bash
+BBBlog/
+├─ templates/ # Pug templates
+├─ resources/ # Static files (CSS, JS, images)
+├─ data.js # Database interactions
+├─ server.js # Express server
+├─ package.json
+└─ README.md
+```
+
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js >= 18
+- MySQL server
+- npm package manager
+
+### Installation
+1. Clone the repository:
+```bash
+git clone https://github.com/YourUsername/BBBlog.git
+cd BBBlog
+```
+2. Install dependencies
+```bash
+npm install
+```
+3. Start the server
+```bash
+node server.js
+```
+4. Visit page
+```bash
+http://localhost:4131
+```
 
