@@ -1,0 +1,68 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        block head_extras
+        link(rel="stylesheet" href="/css/style.css")
+        script(src="/js/theme.js" defer)
+        block title
+            title BBlogg
+    body
+        .page
+            .navbar
+                block navbar
+                    a(href="/")
+                        h1 BBlogg
+                button#toggle 🌙
+            .middle 
+                .left 
+                    block sidebar
+                        h1 Menu
+                        if user
+                            h1 User: #{user.username}
+                        hr
+                        .sidebar-items
+                            .sidebar-section
+                                a(href="/create")
+                                    svg(width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+                                        rect(x="3" y="3" width="18" height="18" rx="4")
+                                        line(x1="12" y1="8" x2="12" y2="16")
+                                        line(x1="8" y1="12" x2="16" y2="12")
+                                    h2 Create Post
+                            .sidebar-section#search
+                                .search-title
+                                    svg(width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+                                        circle(cx="11" cy="11" r="7")
+                                        line(x1="21" y1="21" x2="16.65" y2="16.65")
+                                    h2 Search
+                                form#search-form(action="/home", method="GET")
+                                    input(type="text", name="q", placeholder="Search posts...")
+                                    button(type="submit") Search
+                            .sidebar-section 
+                                if user
+                                    a(href=`/user/${user.username}`)
+                                        svg(width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+                                            circle(cx="12" cy="8" r="4")
+                                            path(d="M4 20c0-4 4-7 8-7s8 3 8 7")
+                                        h2 Profile
+                                else 
+                                    a(href="/login") 
+                                        svg(width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+                                            circle(cx="12" cy="8" r="4")
+                                            path(d="M4 20c0-4 4-7 8-7s8 3 8 7")
+                                        h2 Log in/Sign up
+                            .sidebar-section 
+                                if user
+                                    a(href="/logout") 
+                                        svg(viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false")
+                                            path(fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4")
+                                            path(fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M16 17l5-5-5-5")
+                                            path(fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M21 12H9")
+                                        h2 Logout
+
+                .right
+                    .posts
+                        block content
+                            h1 CONTENT
+                    .footer
+                        block footer

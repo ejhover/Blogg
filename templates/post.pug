@@ -1,0 +1,66 @@
+extends layout.pug
+
+block head_extras 
+    script(src="/js/admin.js" defer)
+
+block content
+    .post-page
+        .post
+            #admin-failure 
+                h2 Edit/Delete Failed!
+                span#admin-errors
+            .post-header
+                input#edit-title(type="text")
+                h2.post-title #{post.title}
+                a.post-author(href=`/user/${post.author}`) #{post.author}
+                p.post-date #{(post.published).split(" ")[0]} | #{(post.published).split(" ")[1]}
+            if user
+                .buttons
+                    button#comment-button
+                        svg(width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+                            path(d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z")
+                    if user.is_admin == 1
+                        button#edit-button
+                            svg(width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+                                path(d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z")
+
+                        button#delete-button
+                            svg(width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+                                path(d="M3 6h18")
+                                path(d="M8 6V4h8v2")
+                                path(d="M6 6l1 14h10l1-14")
+                                path(d="M10 11v6")
+                                path(d="M14 11v6")
+
+                        button#confirm-button Confirm
+            hr
+            .post-content
+                textarea#edit-content
+                p #{post.content} 
+        .make-comment 
+            textarea#comment-content
+            button#confirm-comment Submit Comment
+        if comments
+            .comments
+                h2 Comments
+                each comment in comments  
+                    .comment
+                        .comment-top
+                            .comment-header
+                                b 
+                                    a.comment-author(href=`/user/${comment.author}`) #{comment.author}
+                                p.comment-date #{(comment.published).split(" ")[0]} | #{(comment.published).split(" ")[1]}
+                            
+                            if (user && user.username == comment.author) || (user && user.is_admin == 1)
+                                button#delete-comment
+                                    p#comment-id #{comment.id}
+                                    p#comment-author #{comment.author}
+                                    svg(width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+                                        path(d="M3 6h18")
+                                        path(d="M8 6V4h8v2")
+                                        path(d="M6 6l1 14h10l1-14")
+                                        path(d="M10 11v6")
+                                        path(d="M14 11v6")
+
+                        .comment-body
+                            p #{comment.content}

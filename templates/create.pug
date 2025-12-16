@@ -1,0 +1,19 @@
+extends layout.pug
+
+block head_extras 
+    script(src="/js/create.js" defer)
+
+block content
+    .post-form
+        h1 Create Post
+
+        #post-failure
+            h2 Post Failed!
+            span#post-errors
+
+        form#post-form
+            input#title(type="text", name="title", placeholder="Post Title", required)
+
+            textarea#content(name="content", placeholder="Post Body", required)
+
+            button(type="submit") Post

@@ -1,0 +1,29 @@
+extends layout.pug 
+
+mixin post(id, author, title, published, content)
+    .post
+        #admin-failure 
+            h2 Edit/Delete Failed!
+            span#admin-errors
+        .post-header
+            h2.post-title #{title}
+            a.post-author(href=`/user/${author}`) #{author}
+            p.post-date #{(published).split(" ")[0]} | #{(published).split(" ")[1]}
+        hr
+        .post-content
+            p #{content.substring(0, 200)} 
+            a(href=`/post/${id}`)
+                b Show More...
+
+block content
+    if person
+        h1 #{person}'s Posts
+        if posts && posts.length > 0
+            p Total Posts: #{posts.length}
+        if posts == null || posts.length == 0
+            h2#no-posts No posts.
+        else
+            each post in posts
+                +post(post.id, post.author, post.title, post.published, post.content)
+    else 
+        h1 User not found.

@@ -1,0 +1,20 @@
+extends layout.pug 
+
+block head_extras
+    script(src="/js/register.js" defer)
+
+block content
+    .login-form
+        h1 Register
+
+        #signup-failure
+            h2 Sign Up Failed!
+            span#signup-errors
+
+        form(action="/register", method="POST")
+            input#username(type="text", name="username", placeholder="Username", required)
+            input#password(type="password", name="password", placeholder="Password", required)
+            button#sign-up(type="submit") Register
+
+        a(href="/login")
+            p Already Have An Account? Log in.
